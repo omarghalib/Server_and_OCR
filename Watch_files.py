@@ -116,7 +116,7 @@ class Handler(FileSystemEventHandler):
             add = add1 + add2
             print(add)
             cloud_insertPythonVaribleInTable(name, num_OCR_int,add, image )
-            insertPythonVaribleInTable(name, num_OCR_int,add, image )
+            #insertPythonVaribleInTable(name, num_OCR_int,add, image )
             
 
 if __name__ == '__main__':
