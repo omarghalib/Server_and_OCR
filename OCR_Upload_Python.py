@@ -53,39 +53,52 @@ def ocr_space_url(url, overlay=False, api_key='fe802937b288957', language='eng')
 
 
 def OCR_Req_name(file_path):
-    print("OCR_Req_name")
-    output = ocr_space_file(filename=file_path, language='ara')
-    start = output.find('"ParsedText":"') + 14
-    line_end = output.find('\\')
-    line_start = output.find('\\') + 4
-    end = output.find('","ErrorMessage":') - 4
-    output_text_1 = output[start : line_end]
-    output_text_2 = output[line_start : end]
-    #print(output)
-    return output_text_1,output_text_2
+    try:
+        print("OCR_Req_name")
+        output = ocr_space_file(filename=file_path, language='ara')
+        start = output.find('"ParsedText":"') + 14
+        line_end = output.find('\\')
+        line_start = output.find('\\') + 4
+        end = output.find('","ErrorMessage":') - 4
+        output_text_1 = output[start : line_end]
+        output_text_2 = output[line_start : end]
+        #print(output)
+        return False , output_text_1,output_text_2
+    except:
+        print("Error in OCR")
+        return True, "", ""
 
 def OCR_Req_number(file_path):
-    print("OCR_Req_number")
-    output = ocr_space_file(filename=file_path, language='ara')
-    start = output.find('"ParsedText":"') + 14
-    end = output.find('","ErrorMessage":') - 4
-    output_text = output[start : end]
-    #print(output)
-    return output_text
+    try:
+        print("OCR_Req_number")
+        output = ocr_space_file(filename=file_path, language='ara')
+        start = output.find('"ParsedText":"') + 14
+        end = output.find('","ErrorMessage":') - 4
+        output_text = output[start : end]
+        #print(output)
+        return False, output_text
+    except:
+        print("Error in OCR")
+        return True, ""
 
 def OCR_Req_add(file_path):
-    print("OCR_Req_add")
-    output = ocr_space_file(filename=file_path, language='ara')
-    start = output.find('"ParsedText":"') + 14
-    line_end = output.find('\\')
-    line_start = output.find('\\') + 4
-    end = output.find('","ErrorMessage":') - 4
-    output_text_1 = output[start : line_end]
-    output_text_2 = output[line_start : end]
-    #print(output)
-    return output_text_1,output_text_2
+    try:
+        print("OCR_Req_add")
+        output = ocr_space_file(filename=file_path, language='ara')
+        start = output.find('"ParsedText":"') + 14
+        line_end = output.find('\\')
+        line_start = output.find('\\') + 4
+        end = output.find('","ErrorMessage":') - 4
+        output_text_1 = output[start : line_end]
+        output_text_2 = output[line_start : end]
+        #print(output)
+        return False, output_text_1,output_text_2
+    except:
+        print("Error in OCR")
+        return True, "", ""
 
-def convert_nums(string):
+
+"""def convert_nums(string):
     englishNumbersOnly = ""
     arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];
     for i in range(len(string)):
@@ -93,4 +106,4 @@ def convert_nums(string):
             if string[i] == arabic[9 - x]:
                 englishNumbersOnly += str(x)
             
-    return englishNumbersOnly
+    return englishNumbersOnly"""
