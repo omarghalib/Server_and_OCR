@@ -115,8 +115,8 @@ class Handler(FileSystemEventHandler):
             add1,add2 = OCR_Req_add(file_path_add)
             add = add1 + add2
             print(add)
-            cloud_insertPythonVaribleInTable(name, num_OCR_int,add, file_path_name )
-            insertPythonVaribleInTable(name, num_OCR_int,add, file_path_name )
+            cloud_insertPythonVaribleInTable(name, num_OCR_int,add, image )
+            insertPythonVaribleInTable(name, num_OCR_int,add, image )
             
 
 if __name__ == '__main__':
