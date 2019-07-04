@@ -10,6 +10,8 @@ from mysql.connector import errorcode
 from datetime import datetime
 import MySQLdb
 import time
+from Main_act import *
+import socket 
 def insertPythonVaribleInTable(name,national_number,address,image_url):
     name.encode()
 #    national_number.encode()
@@ -26,18 +28,40 @@ def insertPythonVaribleInTable(name,national_number,address,image_url):
     result=cursor.fetchall()
     conn.close()
     print ("Record inserted successfully into python_users table")
-#conn= MySQLdb.connect(host = 'localhost' ,user ='root' ,passwd='' ,db='db_images')
-#cursor=conn.cursor()
-#cursor.execute("select * from images")
-#result=cursor.fetchall()
-#cursor.close()
-#conn.close()
-
-   # except mysql.connector.Error as error :
-    #    connection.rollback()
-     #   print("Failed to insert into MySQL table {}".format(error))
-    #finally:
-     #   #closing database connection.
-      #  if(connection.is_connected()):
-       #     cursor.close()
-        #    connection.close()
+    
+def check_for_records() :
+    hostname = socket.gethostname()    
+    IPAddr = socket.gethostbyname(hostname)    
+    print("Your Computer Name is:" + hostname) 
+    print(IPAddr)
+    conn= MySQLdb.connect(host = 'localhost' ,user ='root' ,passwd='' ,db='db_images', port = 3308)
+    conn.set_character_set('utf8')
+    cursor=conn.cursor()
+    try:
+        mySQLconnection = mysql.connector.connect(host = 'localhost' ,user ='root' ,passwd='' ,db='db_images', port = 3308)
+        sql_select_Query = "select url from images"
+        cursor = mySQLconnection .cursor()
+        cursor.execute(sql_select_Query)
+        records = cursor.fetchall()
+        print("Total number of rows is - ", cursor.rowcount)
+        for img_url in records:
+            print(img_url[0])
+            print(type(img_url[0]))
+            url_path = img_url[0]
+            replaced = 'http://' + IPAddr + '/Image_Storage/uploads/'
+            url_path = url_path.replace(replaced, 'C:\\wamp64\\www\\Images_Storage\\Uploads\\' )
+            print(url_path)
+            done = Turn_to_rec(url_path)
+            if done :
+                #delete this record
+                sql_select_Query = "Delete from images where url = %s"
+                cursor.execute(sql_select_Query, img_url)
+                mySQLconnection.commit()
+        cursor.close()
+    except Error as e :
+        print ("Error while connecting to MySQL", e)
+    finally:
+        #closing database connection.
+        if(mySQLconnection .is_connected()):
+            conn.close()
+            print("MySQL connection is closed")
