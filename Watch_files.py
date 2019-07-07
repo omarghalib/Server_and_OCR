@@ -35,7 +35,7 @@ class Watcher:
         self.observer.start()
         try:
             while True:
-                time.sleep(100)
+                time.sleep(10)
         except:
             self.observer.stop()
             print ("Error")
@@ -51,15 +51,10 @@ class Handler(FileSystemEventHandler):
             return None
  
         elif event.event_type == 'created':
-            # Take any action here when a file is first created.
+            # Check records when a file is first created.
             print("File is created")
             print(event.src_path)
-            #image = event.src_path
             check_for_records()
-            #done = Turn_to_rec(image)
-            #check for records
-            #run code on each record
-            #if done : delete record
 
 if __name__ == '__main__':
     w = Watcher()
