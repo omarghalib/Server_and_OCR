@@ -20,7 +20,7 @@ def Turn_to_rec(image) :
     Processed_name = "C:\\wamp64\\www\\Images_Storage\\Crop_Output\\P_name.png"
     Processed_name_2 = "C:\\wamp64\\www\\Images_Storage\\Crop_Output\\P_name_2.png"
     Processed_name_3 = "C:\\wamp64\\www\\Images_Storage\\Crop_Output\\P_name_3.png"
-    crop(image, (0, 20, 549, 133), file_path_name)
+    crop(image, (0, 0, 549, 133), file_path_name)
     crop(image, (0, 133, 549, 250), file_path_add)
     crop(image, (0, 261, 549, 380), file_path_num)
     print("Done Cropping")
